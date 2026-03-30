@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import {withRouter} from 'react-router-dom'
 
-
 class Buscador extends Component {
-
     constructor(props){
         super(props);
         this.state ={
@@ -11,6 +9,9 @@ class Buscador extends Component {
         };
     };
 
+
+
+    
     onSubmit(event){
         event.preventDeFault()
     };
@@ -28,6 +29,7 @@ class Buscador extends Component {
                     <button type='submit'>Buscar</button>
                 </form>
             </div>
+
         );
     };
 };
