@@ -9,9 +9,6 @@ class Buscador extends Component {
         };
     };
 
-
-
-    
     onSubmit(event){
         event.preventDeFault()
     };
