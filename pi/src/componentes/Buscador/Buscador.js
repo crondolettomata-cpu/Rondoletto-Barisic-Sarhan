@@ -26,7 +26,7 @@ class Buscador extends Component {
                 <form onSubmit={(event) => this.onSubmit(event)}>
                     <input onChange={(event) => this.guardarBusqueda(event)} value={this.state.search}/>
                     <button type='submit'>Buscar</button>
-                <form/>
+                </form>
             </div>
         );
     };
