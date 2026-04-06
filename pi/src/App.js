@@ -9,10 +9,15 @@ import Buscador from "./componentes/Buscador/Buscador"
 
 function App() {
   return (
+    
     <div>
-      <Route path='/busqueda/:busqueda' component={Buscador}/>
-      <Route path="/home" component={Home}/>
-      <Route path='' component={NotFound}/>
+      <Header/>
+      <Switch>
+        <Route path='/busqueda/:busqueda' component={Buscador}/>
+        <Route path="/home" component={Home}/>
+        <Route path='' component={NotFound}/>
+      </Switch>
+    
     </div>
   );
 }
