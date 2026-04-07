@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import Header from "../../componentes/Header/Header";
-import Series from "../Series/Series"
-import Peliculas from "../Peliculas/Peliculas";
+import SeccionPelicula from "../../componentes/SeccionPelicula/SeccionPelicula.js";
+import SeccionSerie from "../../componentes/SeccionSerie/SeccionSerie.js";
 import Buscador from "../../componentes/Buscador/Buscador";
 
 function Home() {
     return(
-        <div>
-            <Header/>
+         <React.Fragment className="home">
             <Buscador/>
-            <main>
-                <Peliculas/>
-                <Series />
-            </main>
-        </div>
+            <h1> Peliculas mejores ranqueadas </h1>
+            <SeccionPelicula/>
+            <SeccionSerie />
+        </React.Fragment>
     )
 };
 
