@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "../../componentes/Header/Header";
-import SeccionPelicula from "../../componentes/SeccionPelicula/SeccionPelicula.js";
-import SeccionSerie from "../../componentes/SeccionSerie/SeccionSerie.js";
+import SeccionPelicula from "../../componentes/SeccionPelicula/SeccionPelicula";
+import SeccionSerie from "../../componentes/SeccionSerie/SeccionSerie";
 import Buscador from "../../componentes/Buscador/Buscador";
 
 function Home() {

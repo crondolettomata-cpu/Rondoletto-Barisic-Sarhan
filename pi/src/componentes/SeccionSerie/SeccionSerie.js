@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import CardS from "../../CardS/CardS";
+import CardS from "../CardS/CardS";
 import {Link} from "react-router-dom";
 import "./styles.css"
 
 class SeccionPelicula extends Component{
     constructor(props){
         super(props)
-        this.state = {datos:""}
+        this.state = {datos:[]}
     }
 
     componentDidMount(){
@@ -19,7 +19,7 @@ class SeccionPelicula extends Component{
     render(){
         return(
             <section>
-                {this.state.datos ===""?
+                {this.state.datos.length === 0 ?
                 <h3>Cargando...</h3>:
                 this.state.datos.map(serie => (
                 <CardS
