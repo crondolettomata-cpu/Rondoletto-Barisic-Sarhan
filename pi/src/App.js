@@ -5,7 +5,7 @@ import {Switch, Route} from 'react-router-dom'
 import Resultados from './screens/Resultados/Resultados';
 import Home from "./screens/Home/Home";
 import Buscador from "./componentes/Buscador/Buscador"
-
+import Register from "./screens/Register/Register";
 
 function App() {
   return (
@@ -13,8 +13,13 @@ function App() {
     <div>
       <Header/>
       <Switch>
-        <Route path='/busqueda/:busqueda' component={Buscador}/>
-        <Route path="/home" component={Home}/>
+        <Route path="/Register" component={Register} />
+
+        <Route path='/Busqueda/:busqueda' component={Buscador}/>
+        <Route exact path="/Home" component={Home}/>
+
+
+
         <Route path='' component={NotFound}/>
       </Switch>
     
