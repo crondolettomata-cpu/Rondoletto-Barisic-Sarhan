@@ -46,6 +46,9 @@ class Register extends Component{
         usuariosGuardados.push(nuevoUsuario);
 
         localStorage.setItem("Usuarios", JSON.stringify(usuariosGuardados));
+        localStorage.setItem("userLoggedIn", this.state.email);
+        
+        this.props.history.push('/home');
 
         this.setState({
             email:"",
