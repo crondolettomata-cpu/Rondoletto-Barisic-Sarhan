@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import CardP from "../../CardP/CardP";
 import {Link} from "react-router-dom";
 import "./styles.css"
+import Loader from '../../Loader/Loader';
 
 class SeccionPelicula extends Component{
     constructor(props){
         super(props)
-        this.state = {datos:""}
+        this.state = {datos:[]}
     }
 
     componentDidMount(){
@@ -19,9 +20,10 @@ class SeccionPelicula extends Component{
     render(){
         return(
             <section>
-                {this.state.datos ===""?
-                <h3>Cargando...</h3>:
-                this.state.datos.map(pelicula => (
+                {this.state.datos.length === 0?(
+                <Loader/>
+                ) : (
+                    this.state.datos.map(pelicula =>(
                 <CardP
 
                 id={pelicula.id}
@@ -29,7 +31,8 @@ class SeccionPelicula extends Component{
                 title={pelicula.original_title}
                 overview={pelicula.overview}
                     />
-                ))}
+                ))
+            )}
             </section>
         );
     };

@@ -10,7 +10,7 @@ function Menu (){
             <li><Link to="/series">Series</Link></li>
             <li><Link to="/favoritos">Favoritos</Link></li>
             <li><Link to="/login">LogIn</Link></li>
-            <li><Link to="/signin">SingIn</Link></li>
+            <li><Link to="/register">Register</Link></li>
         </ul>
     )
 }
