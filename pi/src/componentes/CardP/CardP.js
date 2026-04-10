@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
+import "./styles.css"
 
 class CardP extends Component{
     constructor (props){
@@ -19,7 +20,7 @@ class CardP extends Component{
         return(
             <article className = 'card-personaje'>
 
-                <img scr= { "https://image.tmdb.org/t/p/w342" +this.props.img} alt={this.props.title} className='fotos'/>
+                <img src= { "https://image.tmdb.org/t/p/w342" + this.props.img} alt={this.props.title} className='fotos'/>
                 <h2 className='titulo'>{this.props.title}</h2>
 
                 <section className="info">

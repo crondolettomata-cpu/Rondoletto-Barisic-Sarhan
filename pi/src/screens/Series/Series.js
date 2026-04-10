@@ -1,1 +1,7 @@
-import Loader from "../../componentes/Loader/Loader"
+import React from "react";
+
+function Series () {
+
+};
+
+export default Series

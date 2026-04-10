@@ -19,7 +19,7 @@ class CardS extends Component{
         return(
             <article className = 'card-personaje'>
 
-                <img scr= { "https://image.tmdb.org/t/p/w342" +this.props.img} alt={this.props.name} className='fotos'/>
+                <img src= { "https://image.tmdb.org/t/p/w342" +this.props.img} alt={this.props.name} className='fotos'/>
                 <h2 className='titulo'>{this.props.name}</h2>
 
                 <section className="info">
