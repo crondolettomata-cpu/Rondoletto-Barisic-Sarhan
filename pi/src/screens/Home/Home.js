@@ -16,7 +16,6 @@ componentDidMount() {
 render () {
     return(
          <React.Fragment >
-            <Header/>
             <div className="home">
             <Buscador/>
             <SeccionPelicula/>

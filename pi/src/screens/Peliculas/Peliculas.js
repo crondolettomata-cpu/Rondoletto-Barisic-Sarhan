@@ -7,7 +7,6 @@ function Peliculas ( ) {
 
     return(
         <React.Fragment >
-            <Header/>
             <div>
             <SeccionPelicula />
             </div>

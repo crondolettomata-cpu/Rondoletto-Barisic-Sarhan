@@ -4,7 +4,7 @@ function Footer (){
         <footer>
             <ul>
                 <li>Catalina Rondoletto Mata</li>
-                <li>Sol Maria Fernandez Barisic</li>
+                <li>Sol María Fernández Barisic</li>
                 <li>Yamile Sarhan</li>
             </ul>
         </footer>

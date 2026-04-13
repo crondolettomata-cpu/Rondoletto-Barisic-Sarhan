@@ -5,7 +5,6 @@ import SeccionSerie from "../../componentes/SeccionSerie/SeccionSerie";
 function Series () {
     return(
          <React.Fragment >
-            <Header/>
             <div>
             <SeccionSerie />
             </div>
