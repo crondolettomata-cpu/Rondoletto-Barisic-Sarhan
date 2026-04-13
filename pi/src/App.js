@@ -10,6 +10,7 @@ import Peliculas from "./screens/Peliculas/Peliculas";
 import Series from "./screens/Series/Series";
 import Detalles from "./screens/Detalles/Detalles";
 import Favoritos from "./screens/Favoritos/Favoritos";
+import Footer from "./componentes/Footer/Footer";
 import Login from "./screens/Login/Login";
 
 function App() {
@@ -18,21 +19,21 @@ function App() {
     <div>
       <Header/>
       <Switch>
-        <Route path="/" component={Home}/>
-        <Route path="/Detalles" component={Detalles}/>
-        <Route path="/Favoritos" component={Favoritos}/>
-        <Route path="/Login" component={Login}/>
-        <Route path="/Peliulas" component={Peliculas}/>
-        <Route path="/Resultados" component={Resultados}/>
-        <Route path="/Series" component={Series}/>
-        <Route path="/Register" component={Register} />
+        <Route exact path="/" component={Home}/>
+        <Route path="/detalles" component={Detalles}/>
+        <Route path="/favoritos" component={Favoritos}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/peliculas" component={Peliculas}/>
+        <Route path="/resultados" component={Resultados}/>
+        <Route path="/series" component={Series}/>
+        <Route path="/register" component={Register} />
 
-        <Route path='/Busqueda/:busqueda' component={Buscador}/>
+        <Route path='/busqueda/:busqueda' component={Buscador}/>
         <Route exact path="/Home" component={Home}/>
 
         <Route path='' component={NotFound}/>
       </Switch>
-    
+      <Footer />
     </div>
   );
 }
