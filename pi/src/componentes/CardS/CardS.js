@@ -23,7 +23,7 @@ class CardS extends Component{
                 <h2 className='titulo'>{this.props.name}</h2>
 
                 <section className="info">
-                    <p className={'extra-info' + (this.state.verMenos ? 'false' : 'true')}> {this.props.overview}</p>
+                    <p className={'extra-info' + (this.state.verMenos ? ' false' : ' true')}> {this.props.overview}</p>
                 </section>
                 <Link to={`/Detalle/pelicula/${this.props.id}`} className="link"></Link>
 
