@@ -8,9 +8,7 @@ function Home() {
     return(
          <React.Fragment className="home">
             <Buscador/>
-            <h1> Peliculas mejores ranqueadas </h1>
             <SeccionPelicula/>
-            <h2> Series mejores ranqueadas</h2>
             <SeccionSerie />
         </React.Fragment>
     )

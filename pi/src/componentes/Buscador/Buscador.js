@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {withRouter} from 'react-router-dom'
+import "./styles.css";
 
 class Buscador extends Component {
     constructor(props){
@@ -21,7 +22,7 @@ class Buscador extends Component {
     render(){
         return(
             <div>
-                <form onSubmit={(event) => this.onSubmit(event)}>
+                <form className="buscador" onSubmit={(event) => this.onSubmit(event)}>
                     <input onChange={(event) => this.guardarBusqueda(event)} value={this.state.search}/>
                     <button type='submit'>Buscar</button>
                 </form>

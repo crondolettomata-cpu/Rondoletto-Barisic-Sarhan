@@ -20,22 +20,26 @@ class SeccionPelicula extends Component{
 
     render(){
         return(
-            <section className='section'>
-                {this.state.datos.length === 0?(
-                <Loader/>
-                ) : (
-                    this.state.datos.map(pelicula =>{
-                        console.log(pelicula);
+            <section>
+                <h1 className='titulo'> Peliculas mejores ranqueadas </h1>
+                <div className='section'>
+                    {this.state.datos.length === 0?(
+                    <Loader/>
+                    ) : (
+                        this.state.datos.map(pelicula =>(
                         
-                <CardP
-
-                id={pelicula.id}
-                img={pelicula.poster_path}
-                title={pelicula.original_title}
-                overview={pelicula.overview}
+                    <CardP
+                
+                    key={pelicula.id}
+                    id={pelicula.id}
+                    img={pelicula.poster_path}
+                    title={pelicula.original_title}
+                    overview={pelicula.overview}
                     />
-    })
-            )}
+                    ))
+                )}
+                </div>
+
             </section>
         );
     };

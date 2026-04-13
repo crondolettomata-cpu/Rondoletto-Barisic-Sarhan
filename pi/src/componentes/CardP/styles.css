@@ -1,0 +1,38 @@
+.card-personaje {
+    width: 200px;
+    background-color: rgb(67, 17, 17);
+    color: white;
+    border-radius: 10px;
+    margin: 15px;
+    padding: 35px;
+}
+
+.fotos {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.info {
+    padding: 0 10px;
+}
+
+.extra-info.false{
+    display: none;
+    font-size: 14px;
+}
+
+.extra-info.true{
+    display: block;
+    font-size: 14px;
+}
+
+.vermas {
+    margin: 10px;
+    padding: 8px;
+    background-color: #f5f2f3;
+    border: none;
+    border-radius: 5px;
+    color: rgb(12, 10, 10);
+    width: 90%;
+}
