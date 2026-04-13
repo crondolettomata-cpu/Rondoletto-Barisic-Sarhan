@@ -1,11 +1,18 @@
 import React from "react";
 import Loader from "../../componentes/Loader/Loader"
-function VerTodas ( ) {
-    <div>
-    
-    </div>
+import Header from "../../componentes/Header/Header";
+import SeccionPelicula from "../../componentes/SeccionPelicula/SeccionPelicula";
+
+function Peliculas ( ) {
+
+    return(
+        <React.Fragment >
+            <Header/>
+            <div>
+            <SeccionPelicula />
+            </div>
+        </React.Fragment>
+    );
 };
 
-
-
-export default VerTodas
+export default Peliculas;

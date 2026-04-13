@@ -11,10 +11,6 @@ class Home extends Component {
 
 componentDidMount() {
     const auth = cookies.get("userName");
-    
-    // if (!auth){
-    //     this.props.history.push("/login")
-    // }
 }
 
 render () {
