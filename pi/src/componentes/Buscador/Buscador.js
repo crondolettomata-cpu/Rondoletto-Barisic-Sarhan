@@ -11,7 +11,7 @@ class Buscador extends Component {
     };
 
     onSubmit(event){
-        event.preventDeFault()
+        event.preventDefault()
     };
 
     guardarBusqueda(event){

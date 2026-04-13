@@ -11,7 +11,7 @@ import Series from "./screens/Series/Series";
 import Detalles from "./screens/Detalles/Detalles";
 import Favoritos from "./screens/Favoritos/Favoritos";
 import Footer from "./componentes/Footer/Footer";
-import Login from "./screens/Login/Login";
+// import Login from "./screens/Login/Login";
 
 function App() {
   return (
@@ -22,14 +22,13 @@ function App() {
         <Route exact path="/" component={Home}/>
         <Route path="/detalles" component={Detalles}/>
         <Route path="/favoritos" component={Favoritos}/>
-        <Route path="/login" component={Login}/>
+        {/* <Route path="/login" component={Login}/> */}
         <Route path="/peliculas" component={Peliculas}/>
         <Route path="/resultados" component={Resultados}/>
         <Route path="/series" component={Series}/>
         <Route path="/register" component={Register} />
 
         <Route path='/busqueda/:busqueda' component={Buscador}/>
-        <Route exact path="/Home" component={Home}/>
 
         <Route path='' component={NotFound}/>
       </Switch>
