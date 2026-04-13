@@ -1,5 +1,8 @@
 import React, {Component} from "react";
 import Header from '../../componentes/Header/Header';
+import Cookies from "universal-cookie"
+
+const cookies = new Cookies();
 
 class Register extends Component{
     constructor(props){
@@ -48,6 +51,8 @@ class Register extends Component{
         localStorage.setItem("Usuarios", JSON.stringify(usuariosGuardados));
         localStorage.setItem("userLoggedIn", this.state.email);
         
+        cookies.set("userName", this.state.email)
+
         this.props.history.push('/home');
 
         this.setState({
@@ -86,7 +91,9 @@ class Register extends Component{
                             value={this.state.password}
                             onChange={(event) => this.controlarPassword(event)}/>
 
-                            <button type="submit">Crear cuenta</button>
+                        <button type="submit">Crear cuenta</button>
+
+           
                     </form>
 
                     {this.state.error !=="" ? <p>{this.state.error}</p> : null}
