@@ -1,0 +1,33 @@
+.menu{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+.liMenu {
+    margin: 20px;
+    text-decoration: none;
+
+}
+
+.headerMenu a {
+    text-decoration: none;
+    color: #b4b4b4;
+    font-weight: bolder;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.headerMenu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    background-color: #431111;
+}
+
+.logoClotilde {
+    width: 200px;
+    height: 200px;
+
+}

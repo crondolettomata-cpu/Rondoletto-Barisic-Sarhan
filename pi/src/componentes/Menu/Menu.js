@@ -5,14 +5,18 @@ import { BrowserRouter } from "react-router-dom";
 
 function Menu (){
     return (
-        <ul className="menu">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/peliculas">Peliculas</Link></li>
-            <li><Link to="/series">Series</Link></li>
-            <li><Link to="/favoritos">Favoritos</Link></li>
-            <li><Link to="/login">LogIn</Link></li>
-            <li><Link to="/register">Register</Link></li>
-        </ul>
+        <section className="headerMenu">
+            <ul className="menu">
+                <li className="liMenu"><Link to="/">Home</Link></li>
+                <li className="liMenu"><Link to="/peliculas">Peliculas</Link></li>
+                <li className="liMenu"><Link to="/series">Series</Link></li>
+                <li className="liMenu"><Link to="/favoritos">Favoritos</Link></li>
+                <li className="liMenu"><Link to="/login">LogIn</Link></li>
+                <li className="liMenu"><Link to="/register">Register</Link></li>
+            </ul>
+            <img src= "/img/clotilde.png" alt="logo de clotilde" className="logoClotilde"></img>
+        </section>
+        
     )
 }
 
