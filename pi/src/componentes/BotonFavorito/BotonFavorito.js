@@ -1,10 +1,26 @@
-import React from "react";
+import React, {Component} from "react";
+
 export default class BotonFavorito extends Component {
     constructor (props) {
         super (props)
         this.state = {
             favoritos : false
         }}
+
+        componentDidMount(){
+            let storage = localStorage.getItem ("favoritos")
+            let favoritos = JSON.parse(storage)
+
+            if (favoritos !== null) {
+                let existe = favoritos.filter(fav => fav === this.props.id)
+                if (existe.lenght > 0){
+                    this.setState({
+                        favorito: true
+                    })
+                }
+            }
+        }
+
         agregarFav (id) {
             let storage = localStorage.getItem("favoritos");
             let favoritos = JSON.parse(storage);
@@ -17,16 +33,15 @@ export default class BotonFavorito extends Component {
                 favoritos.push(id);
                 localStorage.setItem ("favoritos", JSON.stringify(favoritos));
             }
-            this.setState ({favoritos: true})
+            this.setState ({favorito: true})
         }
         eliminarFav(id) {
             let storage = localStorage.getItem("favoritos");
             let favoritos = JSON.parse(storage); 
-            let nuevosFavs = favoritos.filter(function(fav){
-                return fav !==id; 
-            }); 
+            let nuevosFavs = favoritos.filter(fav => fav !== id)
+            
             localStorage.setItem("favoritos", JSON.stringify(nuevosFavs));
-            this.setState({favoritos: false})
+            this.setState({favorito: false})
         }
         render (){
             return (

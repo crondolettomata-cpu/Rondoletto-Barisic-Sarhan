@@ -1,4 +1,4 @@
-import React from "react";
+import React , {Component} from "react";
 import Loader from "../Loader/Loader"
 
 class DetallePelicula extends Component {
@@ -10,7 +10,7 @@ class DetallePelicula extends Component {
     }
     componentDidMount (){
         const pelicula = this.props.match.params.id 
-        fetch("https://api.themoviedb.org/3/movie/${pelicula}?api_key=9f00611fdf617c67427de634a461ac6c")
+        fetch(`https://api.themoviedb.org/3/movie/${pelicula}?api_key=9f00611fdf617c67427de634a461ac6c`)
         .then (response => response.json())
         .then (data => {
             this.setState ({datos: data})
@@ -29,6 +29,7 @@ class DetallePelicula extends Component {
                 <p>Rating: {this.state.datos.vote_average}</p>
                 <p>Fecha: {this.state.datos.release_date}</p>
                 <p>{this.state.datos.overview}</p>
+                <p>Duración: {this.state.datos.runtime} minutos</p>
                 <p>Géneros: {this.state.datos.genres.map(genero => (<li key={genero.id}>{genero.name}</li>))}</p> 
             </section>
         )
