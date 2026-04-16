@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CardP from "../../componentes/CardP/CardP";
 import CardS from "../../componentes/CardS/CardS";
 import Loader from "../../componentes/Loader/Loader";
+import "./styles.css"
 
 class Resultados extends Component{
     constructor(props){
@@ -29,8 +30,8 @@ class Resultados extends Component{
     render(){
         return(
             <div>
-                <section>
-                    {this.state.resultados.length === 0 ? ( <Loader/> ) :
+                <section className="section">
+                    {!this.state.resultados || this.state.resultados.length === 0 ? ( <Loader/> ) :
                     
                     (
                     this.state.tipo === "movie" ? 

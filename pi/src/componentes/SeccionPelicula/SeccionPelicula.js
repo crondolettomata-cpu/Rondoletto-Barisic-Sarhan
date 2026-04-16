@@ -39,6 +39,7 @@ class SeccionPelicula extends Component{
                     ))
                 )}
                 </div>
+                
 
             </section>
         );

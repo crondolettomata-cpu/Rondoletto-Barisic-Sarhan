@@ -24,13 +24,13 @@ function App() {
         <Route path="/favoritos" component={Favoritos}/>
          <Route path="/login" component={Login}/> 
         <Route path="/peliculas" component={Peliculas}/>
-        <Route path="/resultados" component={Resultados} />
+        <Route exact path="/resultados" component={Resultados} />
         <Route path="/series" component={Series}/>
         <Route path="/register" component={Register} />
 
         <Route path='/busqueda/:busqueda' component={Buscador}/>
 
-        <Route path='' component={NotFound}/>
+        <Route component={NotFound}/>
       </Switch>
       <Footer />
     </div>

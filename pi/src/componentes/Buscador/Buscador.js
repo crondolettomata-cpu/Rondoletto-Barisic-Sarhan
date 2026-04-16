@@ -8,14 +8,14 @@ class Buscador extends Component {
         super(props);
         this.state ={
             search: '',
-            tipo: ''
+            tipo: 'movie'
         };
     };
 
     onSubmit(event){
         event.preventDefault()
 
-        this.props.history.push(`/Resultados?tipo=${this.state.tipo}&search=${this.state.search}`);
+        this.props.history.push(`/resultados?tipo=${this.state.tipo}&search=${this.state.search}`);
     };
 
     guardarTipo(event){
