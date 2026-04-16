@@ -60,7 +60,7 @@ class Favoritos extends Component {
     };
 
     eliminarPeli (id) {
-        let nuevosFavsP = this.state.favoritosPeliculas.filter(eliminar => eliminaar != id);
+        let nuevosFavsP = this.state.favoritosPeliculas.filter(eliminar => eliminar != id);
         localStorage.setItem(
             "favoritosPeliculas",
             JSON.stringify(nuevosFavsP)
@@ -92,13 +92,13 @@ class Favoritos extends Component {
                     {this.state.peliculas.length === 0 ? (
                         <Loader/>
                     ) : (
-                    this.state.peliculas.map (serie => (
+                    this.state.peliculas.map (pelicula => (
                     <CardS 
-                    key = {peliculas.id}
-                    id = {peliculas.id}
-                    img = {peliculas.poster_path}
-                    name = {peliculas.original_name}
-                    overview = {peliculas.overview}
+                    key = {pelicula.id}
+                    id = {pelicula.id}
+                    img = {pelicula.poster_path}
+                    name = {pelicula.original_name}
+                    overview = {pelicula.overview}
                     />
                     ))
                     )}
@@ -110,11 +110,11 @@ class Favoritos extends Component {
                     ) : (
                     this.state.series.map (serie => (
                     <CardS 
-                    key = {series.id}
-                    id = {series.id}
-                    img = {series.poster_path}
-                    name = {series.original_name}
-                    overview = {series.overview}
+                    key = {serie.id}
+                    id = {serie.id}
+                    img = {serie.poster_path}
+                    name = {serie.original_name}
+                    overview = {serie.overview}
                     />
                     ))
                     )}
