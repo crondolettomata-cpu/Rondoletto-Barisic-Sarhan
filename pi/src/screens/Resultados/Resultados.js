@@ -1,15 +1,61 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+import CardP from "../../componentes/CardP/CardP";
+import CardS from "../../componentes/CardS/CardS";
+import Loader from "../../componentes/Loader/Loader";
 
-import Loder from "../../componentes/Loader/Loader";
-
-export default class Resultados extends Component {
-    constructor(props) {
+class Resultados extends Component{
+    constructor(props){
         super(props)
+        this.state={
+            resultados:[],
+            tipo: ''
+        }
     }
-    render() {
-        return (
+
+    componentDidMount(){
+        const query = new URLSearchParams(this.props.location.search);
+        const tipo = query.get("tipo");
+        const search = query.get("search");
+
+        fetch(`https://api.themoviedb.org/3/search/${tipo}?query=${search}&api_key=9f00611fdf617c67427de634a461ac6c`)
+        .then(response => response.json())
+        .then (data => {this.setState({resultados:data.results})})
+        .catch(error => console.log(error))
+    }
+
+    render(){
+        return(
             <div>
-                Resultados de: {this.props.match.params.busqueda}</div>
+                <section>
+                    {this.state.resultados.length === 0 ? <Loader/>:
+                    
+                    this.props.match.params.tipo === "movie" ? (
+                    (<CardP
+                        id={pelicula.id}
+                        img= {pelicula.poster_path}
+                        title = {pelicula.original_title}
+                        overview = {pelicula.overview} />)
+                    )
+                }
+                </section>
+
+                <section>
+                    {this.state.resultados.length === 0 ? <Loader/>:
+                    
+                    this.state.resultados.map( serie =>
+                    (<CardS
+                        id={serie.id}
+                        img= {serie.poster_path}
+                        name = {serie.original_name}
+                        overview = {serie.overview} />)
+                    )
+                }
+                </section>
+
+
+            </div>
         )
     }
 }
+
+export default Resultados;
