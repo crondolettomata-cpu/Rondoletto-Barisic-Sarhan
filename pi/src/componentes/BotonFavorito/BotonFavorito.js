@@ -4,7 +4,7 @@ export default class BotonFavorito extends Component {
     constructor (props) {
         super (props)
         this.state = {
-            favoritos : false
+            favorito : false
         }}
 
         componentDidMount(){
@@ -12,7 +12,8 @@ export default class BotonFavorito extends Component {
             let favoritos = JSON.parse(storage)
 
             if (favoritos !== null) {
-                let existe = favoritos.filter(fav => fav === this.props.id)
+                let existe = favoritos.filter(fav => {
+                    return fav.id === this.props.id && fav.tipo === this.props.tipo})
                 if (existe.lenght > 0){
                     this.setState({
                         favorito: true
@@ -21,24 +22,29 @@ export default class BotonFavorito extends Component {
             }
         }
 
-        agregarFav (id) {
+        agregarFav (id, tipo) {
             let storage = localStorage.getItem("favoritos");
             let favoritos = JSON.parse(storage);
+            let nuevoFavorito = {
+                id: id,
+                tipo: tipo
+            }
             if (favoritos == null) {
-                let primerFav = [id];
-                let primerFavString = JSON.stringify(primerFav);
-                localStorage.setItem ("favoritos", primerFavString)
+                let primerFav = [nuevoFavorito]
+                localStorage.setItem("favoritos", JSON.stringify(primerFav))
             }
             else {
-                favoritos.push(id);
+                favoritos.push(nuevoFavorito);
                 localStorage.setItem ("favoritos", JSON.stringify(favoritos));
             }
             this.setState ({favorito: true})
         }
-        eliminarFav(id) {
+        eliminarFav(id, tipo) {
             let storage = localStorage.getItem("favoritos");
             let favoritos = JSON.parse(storage); 
-            let nuevosFavs = favoritos.filter(fav => fav !== id)
+            let nuevosFavs = favoritos.filter(fav => {
+                return !(fav.id === id && fav.tipo === tipo)
+            })
             
             localStorage.setItem("favoritos", JSON.stringify(nuevosFavs));
             this.setState({favorito: false})
@@ -46,12 +52,15 @@ export default class BotonFavorito extends Component {
         render (){
             return (
                 <div>
-                    <button onClick= {() => this.agregarFav(this.props.id)}>
+                    { this.state.favorito === false ? 
+                    <button onClick={() => this.agregarFav(this.props.id, this.props.tipo)}>
                         Agregar a favoritos
                     </button>
-                    <button onClick = {() => this.agregarFav (this.props.id)}>
+                    :
+                    <button onClik ={() => this.eliminarFav(this.props.id, this.props.tipo)}>
                         Eliminar de favoritos
                     </button>
+                    }
                 </div>
             )
         }
