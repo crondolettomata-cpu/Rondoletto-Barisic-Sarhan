@@ -36,3 +36,15 @@
     color: rgb(12, 10, 10);
     width: 90%;
 }
+
+.botonfav {
+    margin: 10px;
+    padding: 8px;
+    background-color: #f5f2f3;
+    border: none;
+    outline: 0;
+    border-radius: 5px;
+    color: rgb(12,10,10);
+    width: 90%;
+    
+}

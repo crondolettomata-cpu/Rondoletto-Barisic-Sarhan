@@ -11,6 +11,7 @@ function Menu (){
                 <li className="liMenu"><Link to="/peliculas">Peliculas</Link></li>
                 <li className="liMenu"><Link to="/series">Series</Link></li>
                 <li className="liMenu"><Link to="/favoritos">Favoritos</Link></li>
+                <li className="liMenu"><Link to="/favoritos">LogOut</Link></li>
                 <li className="liMenu"><Link to="/login">LogIn</Link></li>
                 <li className="liMenu"><Link to="/register">Register</Link></li>
             </ul>
