@@ -24,7 +24,7 @@ function App() {
         <Route path="/favoritos" component={Favoritos}/>
          <Route path="/login" component={Login}/> 
         <Route path="/peliculas" component={Peliculas}/>
-        <Route path="/Resultados/:tipo/:search" component={Resultados} />
+        <Route path="/resultados" component={Resultados} />
         <Route path="/series" component={Series}/>
         <Route path="/register" component={Register} />
 

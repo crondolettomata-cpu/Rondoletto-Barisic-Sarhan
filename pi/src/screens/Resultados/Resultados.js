@@ -19,7 +19,10 @@ class Resultados extends Component{
 
         fetch(`https://api.themoviedb.org/3/search/${tipo}?query=${search}&api_key=9f00611fdf617c67427de634a461ac6c`)
         .then(response => response.json())
-        .then (data => {this.setState({resultados:data.results})})
+        .then (data => {this.setState({
+            resultados: data.results,
+            tipo: tipo
+        })})
         .catch(error => console.log(error))
     }
 
@@ -27,35 +30,37 @@ class Resultados extends Component{
         return(
             <div>
                 <section>
-                    {this.state.resultados.length === 0 ? <Loader/>:
+                    {this.state.resultados.length === 0 ? ( <Loader/> ) :
                     
-                    this.props.match.params.tipo === "movie" ? (
+                    (
+                    this.state.tipo === "movie" ? 
+                        this.state.resultados.map( pelicula =>
                     (<CardP
+                        key = {pelicula.id}
                         id={pelicula.id}
                         img= {pelicula.poster_path}
                         title = {pelicula.original_title}
-                        overview = {pelicula.overview} />)
-                    )
-                }
-                </section>
-
-                <section>
-                    {this.state.resultados.length === 0 ? <Loader/>:
+                        overview = {pelicula.overview} 
+                        />
+                    ))
+                    
+                :
                     
                     this.state.resultados.map( serie =>
                     (<CardS
+                        key = {serie.id}
                         id={serie.id}
                         img= {serie.poster_path}
                         name = {serie.original_name}
-                        overview = {serie.overview} />)
-                    )
-                }
+                        overview = {serie.overview} />
+                    ))
+                )}
                 </section>
 
 
             </div>
         )
     }
-}
 
+}
 export default Resultados;
