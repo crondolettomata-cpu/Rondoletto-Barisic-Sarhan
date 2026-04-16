@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./styles.css";
 
 
 class Login extends Component {
@@ -56,7 +57,8 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className ="login-container">
+                <div className="login-card"> 
                 <h2>Iniciar Sesión</h2>
                 <form onSubmit={(event) => this.evitarSubmit(event)}>
                     <input
@@ -76,6 +78,7 @@ class Login extends Component {
 
                
                 {this.state.error !== "" ? <p style={{ color: "red" }}>{this.state.error}</p> : null}
+                </div>
             </div>
         );
     }

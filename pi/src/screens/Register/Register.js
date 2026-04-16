@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Header from '../../componentes/Header/Header';
+import "./styles.css";
 import Cookies from "universal-cookie"
 
 const cookies = new Cookies();
@@ -37,7 +38,7 @@ class Register extends Component{
         }
 
         if (this.state.password.length < 6){
-            this.setState({error:"la contrasenia debe tener al menos 6 caracteres"});
+            this.setState({error:"la contraseña debe tener al menos 6 caracteres"});
             return;
         }
 
@@ -73,13 +74,14 @@ class Register extends Component{
 
     render (){
          return (
-             <div>
+             <div className="auth-container">
 
+                <div className="auth-card">
                   <React.Fragment>
                         <h2>Crear Cuenta</h2>
                   </React.Fragment>
 
-                 <form onSubmit={(event) => this.evitarSubimit(event)}>
+                 <form className="auth-form" onSubmit={(event) => this.evitarSubimit(event)}>
                        <input
                            type="Email"
                             value={this.state.email}
@@ -87,7 +89,7 @@ class Register extends Component{
                         
                         <input
                             type="password"
-                            placeholder="Contrasenia"
+                            placeholder="Contraseña"
                             value={this.state.password}
                             onChange={(event) => this.controlarPassword(event)}/>
 
@@ -97,7 +99,7 @@ class Register extends Component{
                     </form>
 
                     {this.state.error !=="" ? <p>{this.state.error}</p> : null}
-
+                    </div>
                 </div>
             
             );
