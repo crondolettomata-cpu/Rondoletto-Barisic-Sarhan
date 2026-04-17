@@ -7,21 +7,20 @@ class CardP extends Component{
     constructor (props){
         super(props);
         this.state ={
-            verMenos: false
-        };
-        this.state = {
+            verMenos: false,
             favorito : false
-        }
+        };
     }
 
     componentDidMount(){
         let storage = localStorage.getItem ("favoritosPeliculas")
-        let favoritos = JSON.parse(storage)
 
-        if (favoritos !== null) {
+        if (storage !== null && storage !== "") {
+            let favoritos = JSON.parse(storage)
+
             let existe = favoritos.filter (fav => {
                 return fav === this.props.id })
-            if (existe.lenght > 0){
+            if (existe.length > 0){
                 this.setState({
                     favorito: true
                 })
@@ -31,9 +30,13 @@ class CardP extends Component{
 
     agregarFav (id) {
         let storage = localStorage.getItem("favoritosPeliculas");
-        let favoritos = JSON.parse(storage);
+        let favoritos = [];
 
-        if (favoritos == null) {
+        if (storage !== null && storage !== "") {
+            favoritos = JSON.parse(storage)
+        }
+
+        if (favoritos == null || favoritos.length === 0) {
             let primerFav = [id]
             localStorage.setItem("favoritosPeliculas", JSON.stringify(primerFav))
         }
@@ -44,10 +47,10 @@ class CardP extends Component{
         this.setState ({favorito: true})
     }
     eliminarFav(id) {
-        let storage = localStorage.getItem("favoritos");
+        let storage = localStorage.getItem("favoritosPeliculas");
         let favoritos = JSON.parse(storage); 
-        favoritos.push(id)
-        localStorage.setItem("favoritosPelicula", JSON.stringify(favoritos));
+        let filtrados = favoritos.filter(fav => fav !== id)
+        localStorage.setItem("favoritosPeliculas", JSON.stringify(filtrados));
         this.setState({favorito: false})
     }    
 
@@ -67,7 +70,7 @@ class CardP extends Component{
                 <section className="info">
                     <p className={'extra-info' + (this.state.verMenos ?  ' false' : ' true')}> {this.props.overview} </p>
                 </section>
-                <Link to={`/Detalle/pelicula/${this.props.id}`} className="link"></Link>
+                <Link to={`/detalle/pelicula/${this.props.id}`} className="link"></Link>
 
                 <button className="vermas" onClick={()=> this.clickVerMenos()}>
                     {this.state.verMenos ? "Ver más" : "Ver menos" }

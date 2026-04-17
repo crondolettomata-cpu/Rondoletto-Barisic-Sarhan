@@ -1,5 +1,5 @@
 import React , {Component} from "react";
-import { Link } from "react-router-dom";
+
 import CardS from "../../componentes/CardS/CardS";
 import CardP from "../../componentes/CardP/CardP"
 import Loader from "../../componentes/Loader/Loader";
@@ -17,14 +17,17 @@ class Favoritos extends Component {
     }
     componentDidMount () {
         let storageS = localStorage.getItem("favoritosSeries")
-        let favSeries= JSON.parse(storageS)
         let storageP = localStorage.getItem("favoritosPeliculas")
-        let favPeliculas = JSON.parse(storageP)
-        if (favSeries === null) {
-            favSeries = [];
+        
+        let favSeries = [];
+        let favPeliculas =[];
+
+        
+        if (storageS !== null && storageS !== "") {
+            favSeries = JSON.parse(storageS)
         } ;
-        if (favPeliculas === null) {
-            favPeliculas = [];
+        if (storageP !== null && storageP !== "") {
+            favPeliculas = JSON.parse(storageP)
         }
         this.setState ({
             favoritosPeliculas : favPeliculas,
@@ -44,7 +47,7 @@ class Favoritos extends Component {
             .catch(error => console.log(error))
         )
         favSeries.map (id => 
-            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=9f00611fdf617c67427de634a461ac6c`)
+            fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=9f00611fdf617c67427de634a461ac6c`)
             .then(response => response.json())
             .then(data => {
                 let serie = this.state.series;
@@ -60,7 +63,7 @@ class Favoritos extends Component {
     };
 
     eliminarPeli (id) {
-        let nuevosFavsP = this.state.favoritosPeliculas.filter(eliminar => eliminar != id);
+        let nuevosFavsP = this.state.favoritosPeliculas.filter(eliminar => eliminar !== id);
         localStorage.setItem(
             "favoritosPeliculas",
             JSON.stringify(nuevosFavsP)
@@ -93,11 +96,11 @@ class Favoritos extends Component {
                         <Loader/>
                     ) : (
                     this.state.peliculas.map (pelicula => (
-                    <CardS 
+                    <CardP 
                     key = {pelicula.id}
                     id = {pelicula.id}
                     img = {pelicula.poster_path}
-                    name = {pelicula.original_name}
+                    title = {pelicula.original_title}
                     overview = {pelicula.overview}
                     />
                     ))
