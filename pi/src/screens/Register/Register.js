@@ -85,6 +85,7 @@ class Register extends Component{
                        <input
                            type="Email"
                             value={this.state.email}
+                            placeholder="Email"
                             onChange={(event) => this.controlarEmail(event)}/>
                         
                         <input
