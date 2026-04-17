@@ -5,8 +5,11 @@ const cookies = new Cookies();
 
 class Logout extends Component{
     componentDidMount(){
-      cookies.remove("user-auth-cookie");
-      this.props.history.push("/");  
+        console.log("antes de borrar", cookies.get("user-auth-cookie"));
+        cookies.remove("user-auth-cookie");
+        console.log("despues de borrar", cookies.get("user-auth-cookie"));
+        localStorage.removeItem("userLoggedIn");
+        this.props.history.push("/");  
     }
 
     render (){

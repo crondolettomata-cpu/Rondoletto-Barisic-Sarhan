@@ -1,5 +1,5 @@
 import React , {Component} from "react";
-
+import "./styles.css"
 import CardS from "../../componentes/CardS/CardS";
 import CardP from "../../componentes/CardP/CardP"
 import Loader from "../../componentes/Loader/Loader";
@@ -89,9 +89,9 @@ class Favoritos extends Component {
     render () {
         return (
             <section>
-                <h1>Favoritos</h1>
-                <h2>Peliculas favoritas</h2>
-                <div> 
+                <h1 className = "tit1">Favoritos</h1>
+                <h2 className = "tit1">Peliculas favoritas</h2>
+                <div className = "ppff"> 
                     {this.state.peliculas.length === 0 ? (
                         <Loader/>
                     ) : (
@@ -106,8 +106,8 @@ class Favoritos extends Component {
                     ))
                     )}
                 </div>
-                <h2>Series favoritas</h2>
-                <div> 
+                <h2 className = "tit1">Series favoritas</h2>
+                <div className = "ppff"> 
                     {this.state.series.length === 0 ? (
                         <Loader/>
                     ) : (

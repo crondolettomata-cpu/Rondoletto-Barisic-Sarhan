@@ -43,7 +43,7 @@ class Login extends Component {
             localStorage.setItem("userLoggedIn", usuarioValido.email);
 
            
-            this.props.history.push('/home');
+            this.props.history.push('/');
         } else {
             
             this.setState({ error: "Credenciales incorrectas" });

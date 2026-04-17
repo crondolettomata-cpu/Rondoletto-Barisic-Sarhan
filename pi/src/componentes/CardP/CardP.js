@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
-
+import Cookies from "universal-cookie";
 import "./styles.css"
+
+const cookies = new Cookies();
 
 class CardP extends Component{
     constructor (props){
@@ -11,6 +13,8 @@ class CardP extends Component{
             favorito : false
         };
     }
+
+    
 
     componentDidMount(){
         let storage = localStorage.getItem ("favoritosPeliculas")
@@ -60,6 +64,7 @@ class CardP extends Component{
 
     render(){
         console.log(this.props);
+        let usuario = cookies.get("user-auth-cookie")
 
         return(
             <article className = 'card-personaje'>
@@ -77,15 +82,16 @@ class CardP extends Component{
                 </button>
                 
                 <div className = "botonfav">
-                    { this.state.favorito === false ? 
-                    <button onClick={() => this.agregarFav(this.props.id)}>
-                        Agregar a favoritos
-                    </button>
-                    :
-                    <button onClick ={() => this.eliminarFav(this.props.id)}>
-                        Eliminar de favoritos
-                    </button>
-                    }
+                    { usuario !== null ? 
+                        (this.state.favorito === false ? 
+                        <button onClick={() => this.agregarFav(this.props.id)}>
+                            Agregar a favoritos
+                        </button>
+                        :
+                        <button onClick ={() => this.eliminarFav(this.props.id)}>
+                            Eliminar de favoritos
+                        </button>
+                        ) : null}
                 </div>
 
             </article>
