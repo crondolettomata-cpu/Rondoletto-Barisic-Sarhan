@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import "./styles.css";
+import Cookies from "universal-cookie"
 
-
+const cookies = new Cookies ();
 
 
 class Login extends Component {
@@ -36,7 +37,7 @@ class Login extends Component {
        
         if (usuarioValido) {
             
-            document.cookie = "user=" + usuarioValido.email + "; path=/";
+            cookies.set("user-auth-cookie" , usuarioValido.email);
             
             
             localStorage.setItem("userLoggedIn", usuarioValido.email);

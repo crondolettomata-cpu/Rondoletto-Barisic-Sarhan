@@ -12,6 +12,7 @@ import Detalles from "./screens/Detalles/Detalles";
 import Favoritos from "./screens/Favoritos/Favoritos";
 import Footer from "./componentes/Footer/Footer";
 import Login from "./screens/Login/Login";
+import Logout from "./screens/Logout/Logout";
 
 function App() {
   return (

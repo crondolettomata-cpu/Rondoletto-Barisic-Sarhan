@@ -52,9 +52,9 @@ class Register extends Component{
         localStorage.setItem("Usuarios", JSON.stringify(usuariosGuardados));
         localStorage.setItem("userLoggedIn", this.state.email);
         
-        cookies.set("userName", this.state.email)
+        cookies.set("user-auth-cookie", this.state.email)
 
-        this.props.history.push('/home');
+        this.props.history.push('/');
 
         this.setState({
             email:"",
