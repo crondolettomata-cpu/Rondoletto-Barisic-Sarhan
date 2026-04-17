@@ -2,86 +2,123 @@ import React , {Component} from "react";
 import { Link } from "react-router-dom";
 import CardS from "../../componentes/CardS/CardS";
 import CardP from "../../componentes/CardP/CardP"
+import Loader from "../../componentes/Loader/Loader";
+
 
 class Favoritos extends Component {
     constructor (props) {
         super(props)
         this.state = {
             peliculas : [],
-            series : []
+            series : [],
+            favoritosSeries : [],
+            favoritosPeliculas : []
         }
     }
     componentDidMount () {
-        if (!document.cookie) {
-            this.props.history.push("/")
-        }
-        let storage = localStorage.getItem("favoritos")
-        let favoritos= JSON.parse(storage)
-        if (favoritos !== null) {
-            let peliculasFav = favoritos.filter(fav => fav.tipo === "movie")
-            let seriesFav = favoritos.filter(fav => fav.tipo === "tv")
-
-            peliculasFav.map(fav => 
-                fetch(`https://api.themoviedb.org/3/movie/${fav.id}?api_key=9f00611fdf617c67427de634a461ac6c`)
-                .then (response => response.json())
-                .then (data => {
-                    let peliculasAct = this.state.peliculas
-                    peliculasAct.push (data)
-                    this.setState ({
-                        peliculas: peliculasAct
-                    })
-                })
-                .catch(error => console.log(error))
-            )
-            seriesFav.map(fav => 
-                fetch(`https://api.themoviedb.org/3/tv/${fav.id}?api_key=9f00611fdf617c67427de634a461ac6c`)
-                .then (response => response.json())
-                .then (data => {
-                    let seriesAct = this.state.series
-                    seriesAct.push (data)
-                    this.setState ({
-                        peliculas: seriesAct
-                    })
-                })
-                .catch(error => console.log(error))
-            )
+        let storageS = localStorage.getItem("favoritosSeries")
+        let favSeries= JSON.parse(storageS)
+        let storageP = localStorage.getItem("favoritosPeliculas")
+        let favPeliculas = JSON.parse(storageP)
+        if (favSeries === null) {
+            favSeries = [];
         } ;
-    
-    };
-    borrarFav (id, tipo){
-        let storage = localStorage.getItem ("favoritos")
-        let favoritos = JSON.parse(storage)
-        let nuevosFavs = favoritos.filter (fav => {
-            return !(fav.id === id && fav.tipo === tipo)
-        })
-        localStorage.setItem ("favoritos", JSON.stringify(nuevosFavs))
-
-        if (tipo === "movie") {
-            let nuevasPel = this.state.peliculas.filter( pelicula => pelicula.id !== id)
-            this.setState ({
-                peliculas: nuevasPel
-            })
-        } else {
-            let nuevasSer = this.state.series.filter (series => series.id !== id)
-            this.setState ({
-                series: nuevasSer
-            })
+        if (favPeliculas === null) {
+            favPeliculas = [];
         }
+        this.setState ({
+            favoritosPeliculas : favPeliculas,
+            favoritosSeries : favSeries
+        });
+
+        favPeliculas.map (id => 
+            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=9f00611fdf617c67427de634a461ac6c`)
+            .then(response => response.json())
+            .then(data => {
+                let peli = this.state.peliculas; 
+                peli.push(data);
+                this.setState ({
+                    peliculas: peli
+                })
+            })
+            .catch(error => console.log(error))
+        )
+        favSeries.map (id => 
+            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=9f00611fdf617c67427de634a461ac6c`)
+            .then(response => response.json())
+            .then(data => {
+                let serie = this.state.series;
+                serie.push(data);
+                this.setState ({
+                    series: serie
+                })
+            })
+            .catch(error => console.log(error))
+        )
+
+      
+    };
+
+    eliminarPeli (id) {
+        let nuevosFavsP = this.state.favoritosPeliculas.filter(eliminar => eliminar != id);
+        localStorage.setItem(
+            "favoritosPeliculas",
+            JSON.stringify(nuevosFavsP)
+        );
+        this.setState ({
+            favoritosPeliculas: nuevosFavsP,
+            peliculas: this.state.peliculas.filter( pelis => pelis.id !== id)
+        })
     }
+
+    eliminarSerie(id) {
+        let nuevosFavsS = this.state.favoritosSeries.filter(eliminar => eliminar !== id);
+        localStorage.setItem(
+            "favoritosSeries",
+            JSON.stringify(nuevosFavsS)
+        );
+        this.setState ({
+            favoritosSeries: nuevosFavsS,
+            series: this.state.series.filter (serie => serie.id !== id)
+        });
+    }
+
     render () {
         return (
             <section>
+                <h1>Favoritos</h1>
                 <h2>Peliculas favoritas</h2>
-               { this.state.peliculas.map(pelicula => {(
-                    <CardP
-                        key = {pelicula.id}
-                        id = {pelicula.id}
-                        img = {pelicula.poster_path}
-                        title = {pelicula.original_title}
-                        overview = {pelicula.overview}
+                <div> 
+                    {this.state.peliculas.length === 0 ? (
+                        <Loader/>
+                    ) : (
+                    this.state.peliculas.map (pelicula => (
+                    <CardS 
+                    key = {pelicula.id}
+                    id = {pelicula.id}
+                    img = {pelicula.poster_path}
+                    name = {pelicula.original_name}
+                    overview = {pelicula.overview}
                     />
-                 )})}
+                    ))
+                    )}
+                </div>
                 <h2>Series favoritas</h2>
+                <div> 
+                    {this.state.series.length === 0 ? (
+                        <Loader/>
+                    ) : (
+                    this.state.series.map (serie => (
+                    <CardS 
+                    key = {serie.id}
+                    id = {serie.id}
+                    img = {serie.poster_path}
+                    name = {serie.original_name}
+                    overview = {serie.overview}
+                    />
+                    ))
+                    )}
+                </div>
             </section>
         )
     }
