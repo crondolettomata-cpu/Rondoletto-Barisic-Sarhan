@@ -22,7 +22,7 @@ class Login extends Component {
         let usuariosGuardados = localStorage.getItem('Usuarios');
         
         
-        if (usuariosGuardados === null) {
+        if (usuariosGuardados === null || usuariosGuardados === "") {
             this.setState({ error: "Credenciales incorrectas" });
             return;
         }
@@ -40,7 +40,7 @@ class Login extends Component {
             cookies.set("user-auth-cookie" , usuarioValido.email);
             
             
-            localStorage.setItem("userLoggedIn", usuarioValido.email);
+            // localStorage.setItem("userLoggedIn", usuarioValido.email);
 
            
             this.props.history.push('/');

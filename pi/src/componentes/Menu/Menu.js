@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {withRouter} from "react-router-dom"
 import { BrowserRouter } from "react-router-dom";
 import Cookies from "universal-cookie";
 
@@ -19,13 +20,13 @@ function Menu (){
                 <li className="liMenu"><Link to="/series">Series</Link></li>
                 {usuario ? (
                     <React.Fragment>
-                        <li className="liMenu"><Link to="/login">LogIn</Link></li>
-                        <li className="liMenu"><Link to="/register">Register</Link></li>
+                        <li className="liMenu"><Link to="/favoritos">Favoritos</Link></li>
+                        <li className="liMenu"><Link to="/logout">LogOut</Link></li>
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
-                        <li className="liMenu"><Link to="/favoritos">Favoritos</Link></li>
-                        <li className="liMenu"><Link to="/logout">LogOut</Link></li>
+                        <li className="liMenu"><Link to="/login">LogIn</Link></li>
+                        <li className="liMenu"><Link to="/register">Register</Link></li>
                     </React.Fragment>
                 )}
             </ul>
@@ -36,4 +37,4 @@ function Menu (){
 }
 
 
-export default Menu;
+export default withRouter(Menu);

@@ -20,7 +20,7 @@ class Register extends Component{
         event.preventDefault();
 
         let usuariosGuardados = localStorage.getItem('Usuarios');
-        if (usuariosGuardados === null){
+        if (usuariosGuardados === null || usuariosGuardados === ""){
             usuariosGuardados = [];
         }
         else {
@@ -50,7 +50,7 @@ class Register extends Component{
         usuariosGuardados.push(nuevoUsuario);
 
         localStorage.setItem("Usuarios", JSON.stringify(usuariosGuardados));
-        localStorage.setItem("userLoggedIn", this.state.email);
+        // localStorage.setItem("userLoggedIn", this.state.email);
         
         cookies.set("user-auth-cookie", this.state.email)
 
