@@ -5,12 +5,20 @@
     border-radius: 10px;
     margin: 15px;
     padding: 35px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
 }
 
 .fotos {
     width: 100%;
     height: auto;
     border-radius: 10px;
+}
+
+.titulo{
+    color: white;
 }
 
 .info {
@@ -38,13 +46,11 @@
 }
 
 .botonfav {
-    margin: 10px;
     padding: 8px;
-    background-color: #f5f2f3;
     border: none;
     outline: 0;
     border-radius: 5px;
     color: rgb(12,10,10);
     width: 90%;
-    
+    margin: 3px auto;
 }

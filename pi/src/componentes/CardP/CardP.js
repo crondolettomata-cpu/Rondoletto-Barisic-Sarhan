@@ -68,14 +68,20 @@ class CardP extends Component{
 
         return(
             <article className = 'card-personaje'>
-
-                <img src= { "https://image.tmdb.org/t/p/w342" + this.props.img} alt={this.props.title} className='fotos'/>
+                
+                <Link to={`/detalle/pelicula/${this.props.id}`}>
+                    <img 
+                        src={"https://image.tmdb.org/t/p/w342" + this.props.img} 
+                        alt={this.props.title} 
+                        className='fotos'
+                    />
+                </Link>
+                
                 <h2 className='titulo'>{this.props.title}</h2>
 
                 <section className="info">
                     <p className={'extra-info' + (this.state.verMenos ?  ' false' : ' true')}> {this.props.overview} </p>
                 </section>
-                <Link to={`/detalle/pelicula/${this.props.id}`} className="link"></Link>
 
                 <button className="vermas" onClick={()=> this.clickVerMenos()}>
                     {this.state.verMenos ? "Ver más" : "Ver menos" }
