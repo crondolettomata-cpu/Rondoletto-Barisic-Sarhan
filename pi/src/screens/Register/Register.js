@@ -1,111 +1,84 @@
-import React, {Component} from "react";
-import Header from '../../componentes/Header/Header';
+import React, { Component } from "react";
+import Cookies from "universal-cookie";
 import "./styles.css";
-import Cookies from "universal-cookie"
 
 const cookies = new Cookies();
 
-class Register extends Component{
-    constructor(props){
+class Register extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            email:"",
-            password:"",
-            error:""
+            email: "",
+            password: "",
+            error: ""
         };
     }
 
-
-    evitarSubimit(event){
+    evitarSubmit(event) {
         event.preventDefault();
 
+       
+        if (this.state.password.length < 6) {
+            this.setState({ error: "La contraseña debe tener al menos 6 caracteres" });
+            return; 
+        }
+
+     
         let usuariosGuardados = localStorage.getItem('Usuarios');
-        if (usuariosGuardados === null || usuariosGuardados === ""){
-            usuariosGuardados = [];
-        }
-        else {
-            usuariosGuardados = JSON.parse(usuariosGuardados);
-        }
+        let listaUsuarios = [];
 
-
-        let usuariosConEseEmail = usuariosGuardados.filter((usuario) =>{
-            return usuario.email === this.state.email;
-        });
-
-        if (usuariosConEseEmail.length > 0){
-            this.setState({error:"El email ya esta en uso"})
-            return;
+        if (usuariosGuardados !== null && usuariosGuardados !== "") {
+            listaUsuarios = JSON.parse(usuariosGuardados);
         }
 
-        if (this.state.password.length < 6){
-            this.setState({error:"la contraseña debe tener al menos 6 caracteres"});
-            return;
+        let usuarioExistente = listaUsuarios.find((usuario) => usuario.email === this.state.email);
+
+        if (usuarioExistente) {
+            this.setState({ error: "El email ya está en uso" });
+            return; 
         }
 
+       
         let nuevoUsuario = {
             email: this.state.email,
             password: this.state.password
         };
 
-        usuariosGuardados.push(nuevoUsuario);
+        listaUsuarios.push(nuevoUsuario);
+        localStorage.setItem("Usuarios", JSON.stringify(listaUsuarios));
 
-        localStorage.setItem("Usuarios", JSON.stringify(usuariosGuardados));
-        // localStorage.setItem("userLoggedIn", this.state.email);
         
-        cookies.set("user-auth-cookie", this.state.email)
+        cookies.set("user-auth-cookie", this.state.email, { path: '/' });
 
+        
         this.props.history.push('/');
-
-        this.setState({
-            email:"",
-            password: "",
-            error: "",
-        });
-
     }
 
-    controlarEmail(event){
-         this.setState({email:event.target.value});
-    }
-
-    controlarPassword(event){
-          this.setState({password:event.target.value});
-    }
-
-    render (){
-         return (
-             <div className="auth-container">
-
+    render() {
+        return (
+            <div className="auth-container">
                 <div className="auth-card">
-                  <React.Fragment>
-                        <h2>Crear Cuenta</h2>
-                  </React.Fragment>
-
-                 <form className="auth-form" onSubmit={(event) => this.evitarSubimit(event)}>
-                       <input
-                           type="Email"
+                    <h2>Crear Cuenta</h2>
+                    <form className="auth-form" onSubmit={(event) => this.evitarSubmit(event)}>
+                        <input
+                            type="email"
                             value={this.state.email}
                             placeholder="Email"
-                            onChange={(event) => this.controlarEmail(event)}/>
-                        
+                            onChange={(event) => this.setState({ email: event.target.value })}
+                        />
                         <input
                             type="password"
                             placeholder="Contraseña"
                             value={this.state.password}
-                            onChange={(event) => this.controlarPassword(event)}/>
-
+                            onChange={(event) => this.setState({ password: event.target.value })}
+                        />
                         <button type="submit">Crear cuenta</button>
-
-           
                     </form>
-
-                    {this.state.error !=="" ? <p>{this.state.error}</p> : null}
-                    </div>
+                    {this.state.error !== "" ? <p style={{ color: 'red' }}>{this.state.error}</p> : null}
                 </div>
-            
-            );
-        }
-
+            </div>
+        );
+    }
 }
 
-export default Register 
+export default Register;
