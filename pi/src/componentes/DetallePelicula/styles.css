@@ -1,0 +1,26 @@
+.detalleserie {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: rgb(67, 17, 17);
+    border-radius: 12px;
+}
+
+.detalleserie p {
+    color: aliceblue;
+}
+
+.detalleserie h1 {
+    color: aliceblue;
+}
+
+.info{
+    flex-direction: column;
+}
+
+.foto{
+    width: 250px;
+}

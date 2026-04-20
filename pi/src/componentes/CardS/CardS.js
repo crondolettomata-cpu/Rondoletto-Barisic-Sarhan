@@ -64,12 +64,20 @@ class CardS extends Component{
 
     render(){
         console.log(this.props);
-        let usuario = cookies.get("user-auth-cookie");
+        let usuario = cookies.get("user-auth-cookie") || null;;
 
         return(
             <article className = 'card-personaje'>
 
-                <img src= { "https://image.tmdb.org/t/p/w342" +this.props.img} alt={this.props.name} className='fotos'/>
+                <Link to={`/detalleserie/${this.props.id}`}>
+                                    <img 
+                                        src={"https://image.tmdb.org/t/p/w342" + this.props.img} 
+                                        alt={this.props.title} 
+                                        className='fotos'
+                                    />
+                                </Link>
+
+                
                 <h2 className='titulo'>{this.props.name}</h2>
 
                 <section className="info">

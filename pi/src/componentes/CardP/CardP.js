@@ -64,12 +64,12 @@ class CardP extends Component{
 
     render(){
         console.log(this.props);
-        let usuario = cookies.get("user-auth-cookie")
+        let usuario = cookies.get("user-auth-cookie") || null;
 
         return(
             <article className = 'card-personaje'>
                 
-                <Link to={`/detalle/pelicula/${this.props.id}`}>
+                <Link to={`/detallepelicula/${this.props.id}`}>
                     <img 
                         src={"https://image.tmdb.org/t/p/w342" + this.props.img} 
                         alt={this.props.title} 
