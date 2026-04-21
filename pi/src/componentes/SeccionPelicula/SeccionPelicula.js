@@ -10,12 +10,13 @@ class SeccionPelicula extends Component{
         super(props)
         this.state = {
             datos:[],
-            filtro: ""
+            filtro: "",
+            pagina: 1
         }
     }
 
     componentDidMount(){
-        fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=9f00611fdf617c67427de634a461ac6c")
+        fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=1")
         .then (response => response.json())
         .then(data => { console.log(data);
          this.setState({datos: data.results})})
@@ -25,6 +26,19 @@ class SeccionPelicula extends Component{
     filtros = (texto) => { 
         this.setState({ filtro: texto });
     };
+
+    cargarMas() {
+        let paginaSiguiente = this.state.pagina + 1
+        fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=${paginaSiguiente}`)
+        .then (response => response.json())
+        .then (data => {
+            this.setState ({
+                datos: this.state.datos.concat(data.results),
+                pagina: paginaSiguiente
+            })
+        })
+        .catch(error => console.log(error))
+    }
 
     render(){
 
@@ -45,10 +59,10 @@ class SeccionPelicula extends Component{
                 />
 
                 <div className='section'>
-                    {this.state.datos.length === 0?(
+                    {this.state.datos.length === 0 ? (
                     <Loader/>
                     ) : (
-                        this.state.datos.map(pelicula =>(
+                        peliculasFiltradas.map(pelicula =>(
                         
                     <CardP
                 
@@ -62,6 +76,9 @@ class SeccionPelicula extends Component{
                 )}
                 </div>
                 
+                <button onClick={() => this.cargarMas()}>
+                    Cargar más
+                </button>
 
             </section>
         );

@@ -48,10 +48,10 @@ class Register extends Component {
         localStorage.setItem("Usuarios", JSON.stringify(listaUsuarios));
 
         
-        cookies.set("user-auth-cookie", this.state.email, { path: '/' });
+        cookies.set("user-auth-cookie", this.state.email, { path: '/login' });
 
         
-        this.props.history.push('/');
+        this.props.history.push('/login');
     }
 
     render() {
