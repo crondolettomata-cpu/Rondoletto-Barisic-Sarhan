@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CardP from "../CardP/CardP";
 import {Link} from "react-router-dom";
-import Filtro from "../Filtro/Filtro";
 import "./styles.css"
 import Loader from "../Loader/Loader";
 
@@ -10,7 +9,6 @@ class SeccionPelicula extends Component{
         super(props)
         this.state = {
             datos:[],
-            filtro: "",
             pagina: 1
         }
     }
@@ -23,46 +21,32 @@ class SeccionPelicula extends Component{
         .catch(error => console.log(error))
     }
 
-    filtros = (texto) => { 
-        this.setState({ filtro: texto });
+    cargarMas = () => {
+        fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=${this.state.pagina}`)
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+            datos: this.state.datos.concat(data.results),
+            pagina: this.state.pagina + 1
+            });
+        });
     };
 
-    cargarMas() {
-        let paginaSiguiente = this.state.pagina + 1
-        fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=${paginaSiguiente}`)
-        .then (response => response.json())
-        .then (data => {
-            this.setState ({
-                datos: this.state.datos.concat(data.results),
-                pagina: paginaSiguiente
-            })
-        })
-        .catch(error => console.log(error))
-    }
-
     render(){
-
-        const peliculasFiltradas = this.state.datos.filter(pelicula =>
-        pelicula.original_title
-            .toLowerCase()
-            .includes(this.state.filtro.toLowerCase())
+        const textoFiltro = this.props.filtro || "";
+        const filtradas = this.state.datos.filter(pelicula =>
+        pelicula.original_title.toLowerCase().includes(textoFiltro.toLowerCase())
         );
 
         return(
             <section>
                 <h1 className='titulo'> Peliculas mejores ranqueadas </h1>
 
-                <Filtro
-                    placeholder= "filtro"
-                    value={this.state.filtro}
-                    onChange={this.filtros}
-                />
-
                 <div className='section'>
                     {this.state.datos.length === 0 ? (
                     <Loader/>
                     ) : (
-                        peliculasFiltradas.map(pelicula =>(
+                        filtradas.map(pelicula =>(
                         
                     <CardP
                 
@@ -75,11 +59,12 @@ class SeccionPelicula extends Component{
                     ))
                 )}
                 </div>
-                
-                <button onClick={() => this.cargarMas()}>
-                    Cargar más
-                </button>
 
+                {this.props.mostrarBoton && (
+                    <button onClick={this.cargarMas}>
+                        Cargar más
+                    </button>
+                )}
             </section>
         );
     };

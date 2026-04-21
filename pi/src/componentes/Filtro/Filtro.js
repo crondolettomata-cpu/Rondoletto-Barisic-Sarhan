@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
 class Filtro extends Component{
-
-    
-    render(){
-    return (
+    render() {
+        return (
         <div className="filtro">
             <input
             type="text"
@@ -15,6 +13,6 @@ class Filtro extends Component{
         </div>
         );
     }
-};
+}
 
 export default Filtro;
