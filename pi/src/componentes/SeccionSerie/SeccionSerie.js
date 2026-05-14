@@ -2,7 +2,6 @@ import React, { Component, useEffect, useState } from 'react';
 import CardS from "../CardS/CardS";
 import {Link} from "react-router-dom";
 import Loader from "../Loader/Loader";
-import { useState, useEffect } from "react";
 import "./styles.css"
 
 
@@ -13,20 +12,20 @@ function SeccionSerie (props){
     useEffect ( () => {
         fetch("https://api.themoviedb.org/3/tv/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=1")
         .then (response => response.json())
-        .then(data => {this.setState({datos: data.results})})
+        .then(data => setDatos(data.results))
         .catch(error => console.log(error))
-    } , []) 
+    }, []) 
     
 
     
 
-    cargarMas = () => {
+    const cargarMas = () => {
         let paginaSiguiente = pagina + 1;
 
         fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=${paginaSiguiente}`)
         .then(res => res.json())
         .then(data => {
-            setDatos(concat(data.results))
+            setDatos(datos.concat(data.results))
             setPagina (paginaSiguiente)
         })
         .catch(error => console.log(error));
@@ -34,9 +33,9 @@ function SeccionSerie (props){
 
    
 
-        const textoFiltro = filtro || "";
+        const textoFiltro = props.filtro || "";
 
-        const filtradas = this.state.datos.filter(serie =>
+        const filtradas = datos.filter(serie =>
         serie.name.toLowerCase().includes(textoFiltro.toLowerCase())
         );
 
