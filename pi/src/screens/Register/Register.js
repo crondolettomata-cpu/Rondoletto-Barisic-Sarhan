@@ -1,25 +1,21 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Cookies from "universal-cookie";
 import "./styles.css";
 
 const cookies = new Cookies();
 
-class Register extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: "",
-            error: ""
-        };
-    }
+function Register (props){
+    const [email, setEmail] = useState("")
+    const [password, setPassword] =  useState("")
+    const [error, setError] = useState("")
 
-    evitarSubmit(event) {
+    
+    const evitarSubmit = (event) => {
         event.preventDefault();
 
        
-        if (this.state.password.length < 6) {
-            this.setState({ error: "La contraseña debe tener al menos 6 caracteres" });
+        if (password.length < 6) {
+            setError("La contraseña debe tener al menos 6 caracteres" );
             return; 
         }
 
@@ -34,14 +30,14 @@ class Register extends Component {
         let usuarioExistente = listaUsuarios.find((usuario) => usuario.email === this.state.email);
 
         if (usuarioExistente) {
-            this.setState({ error: "El email ya está en uso" });
+            setError("El email ya está en uso" );
             return; 
         }
 
        
         let nuevoUsuario = {
-            email: this.state.email,
-            password: this.state.password
+            email: email,
+            password: password
         };
 
         listaUsuarios.push(nuevoUsuario);
@@ -54,31 +50,29 @@ class Register extends Component {
         this.props.history.push('/login');
     }
 
-    render() {
         return (
             <div className="auth-container">
                 <div className="auth-card">
                     <h2>Crear Cuenta</h2>
-                    <form className="auth-form" onSubmit={(event) => this.evitarSubmit(event)}>
+                    <form className="auth-form" onSubmit={evitarSubmit}>
                         <input
                             type="email"
                             value={this.state.email}
                             placeholder="Email"
-                            onChange={(event) => this.setState({ email: event.target.value })}
+                            onChange={(event) => email( event.target.value )}
                         />
                         <input
                             type="password"
                             placeholder="Contraseña"
                             value={this.state.password}
-                            onChange={(event) => this.setState({ password: event.target.value })}
+                            onChange={(event) => setPassword(  event.target.value )}
                         />
                         <button type="submit">Crear cuenta</button>
                     </form>
-                    {this.state.error !== "" ? <p style={{ color: 'red' }}>{this.state.error}</p> : null}
+                    {error !== "" ? <p style={{ color: 'red' }}>{error}</p> : null}
                 </div>
             </div>
         );
-    }
 }
 
 export default Register;

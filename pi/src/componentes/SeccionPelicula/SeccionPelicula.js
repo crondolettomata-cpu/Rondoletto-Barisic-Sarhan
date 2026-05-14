@@ -1,40 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import CardP from "../CardP/CardP";
 import {Link} from "react-router-dom";
 import "./styles.css"
 import Loader from "../Loader/Loader";
 
-class SeccionPelicula extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            datos:[],
-            pagina: 1
-        }
-    }
+function SeccionPelicula(props){
+    const [datos, setDatos] = useState([])
+    const [pagina, setPagina] = useState(1)
 
-    componentDidMount(){
+    useEffect( () => {
         fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=1")
         .then (response => response.json())
-        .then(data => { console.log(data);
-         this.setState({datos: data.results})})
+        .then(data => setDatos(data.results))
         .catch(error => console.log(error))
-    }
+    }, [])
 
-    cargarMas = () => {
+    const cargarMas = () => {
+        let paginaSiguiente = pagina + 1;
+
         fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=${this.state.pagina}`)
         .then(res => res.json())
         .then(data => {
-            this.setState({
-            datos: this.state.datos.concat(data.results),
-            pagina: this.state.pagina + 1
-            });
-        });
+            setDatos(datos.concat(data.results))
+            setPagina (paginaSiguiente)
+        })
+        .catch(error => console.log(error));
     };
 
-    render(){
-        const textoFiltro = this.props.filtro || "";
-        const filtradas = this.state.datos.filter(pelicula =>
+    
+        const textoFiltro = props.filtro || "";
+
+        const filtradas = datos.filter(pelicula =>
         pelicula.original_title.toLowerCase().includes(textoFiltro.toLowerCase())
         );
 
@@ -43,31 +39,29 @@ class SeccionPelicula extends Component{
                 <h1 className='titulo'> Peliculas mejores ranqueadas </h1>
 
                 <div className='section'>
-                    {this.state.datos.length === 0 ? (
+                    {datos.length === 0 ? (
                     <Loader/>
                     ) : (
                         filtradas.map(pelicula =>(
                         
                     <CardP
-                
-                    key={pelicula.id}
-                    id={pelicula.id}
-                    img={pelicula.poster_path}
-                    title={pelicula.original_title}
-                    overview={pelicula.overview}
+                        key={pelicula.id}
+                        id={pelicula.id}
+                        img={pelicula.poster_path}
+                        title={pelicula.original_title}
+                        overview={pelicula.overview}
                     />
                     ))
                 )}
                 </div>
 
-                {this.props.mostrarBoton && (
-                    <button onClick={this.cargarMas}>
+                {props.mostrarBoton && (
+                    <button onClick={cargarMas}>
                         Cargar más
                     </button>
                 )}
             </section>
         );
-    };
 };
 
 export default SeccionPelicula;
