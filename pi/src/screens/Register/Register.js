@@ -27,7 +27,7 @@ function Register (props){
             listaUsuarios = JSON.parse(usuariosGuardados);
         }
 
-        let usuarioExistente = listaUsuarios.find((usuario) => usuario.email === this.state.email);
+        let usuarioExistente = listaUsuarios.find((usuario) => usuario.email === email);
 
         if (usuarioExistente) {
             setError("El email ya está en uso" );
@@ -44,10 +44,10 @@ function Register (props){
         localStorage.setItem("Usuarios", JSON.stringify(listaUsuarios));
 
         
-        cookies.set("user-auth-cookie", this.state.email, { path: '/login' });
+        cookies.set("user-auth-cookie", email, { path: '/login' });
 
         
-        this.props.history.push('/login');
+        props.history.push('/login');
     }
 
         return (
@@ -57,14 +57,14 @@ function Register (props){
                     <form className="auth-form" onSubmit={evitarSubmit}>
                         <input
                             type="email"
-                            value={this.state.email}
+                            value={email}
                             placeholder="Email"
-                            onChange={(event) => email( event.target.value )}
+                            onChange={(event) => setEmail( event.target.value )}
                         />
                         <input
                             type="password"
                             placeholder="Contraseña"
-                            value={this.state.password}
+                            value={password}
                             onChange={(event) => setPassword(  event.target.value )}
                         />
                         <button type="submit">Crear cuenta</button>

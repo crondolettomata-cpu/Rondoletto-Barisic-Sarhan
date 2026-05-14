@@ -1,90 +1,88 @@
-import React, { Component } from 'react';
+import React, {useState, useEffect} from 'react';
 import "./styles.css";
 import Cookies from "universal-cookie"
 
 const cookies = new Cookies ();
 
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: "",
-            error: "" 
-        };
-    }
+function Login (props) {
+    const [ email, setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [error,setError] = useState("");
 
-    evitarSubmit(event) {
+    const evitarSubmit = (event) => {
         event.preventDefault();
 
-       
         let usuariosGuardados = localStorage.getItem('Usuarios');
         
-        
         if (usuariosGuardados === null || usuariosGuardados === "") {
-            this.setState({ error: "Credenciales incorrectas" });
+            this.setState( "Credenciales incorrectas" );
             return;
-        }
 
-        let listaUsuarios = JSON.parse(usuariosGuardados);
 
-        
-        let usuarioValido = listaUsuarios.find((usuario) => {
-            return usuario.email === this.state.email && usuario.password === this.state.password;
+    }
+
+    let listaUsuarios = JSON.parse(usuariosGuardados);
+
+    let usuarioValido = listaUsuarios.find((usuario) => {
+            return usuario.email === email && usuario.password === password;
         });
 
-       
-        if (usuarioValido) {
+
+     if (usuarioValido) {
             
             cookies.set("user-auth-cookie" , usuarioValido.email);
-            
-            
-            // localStorage.setItem("userLoggedIn", usuarioValido.email);
-
-           
-            this.props.history.push('/');
+             
+            props.history.push('/');
         } else {
             
-            this.setState({ error: "Credenciales incorrectas" });
-        }
-    }
+         setError( "Credenciales incorrectas" );
+        } 
 
-    controlarEmail(event) {
-        this.setState({ email: event.target.value });
-    }
+};
 
-    controlarPassword(event) {
-        this.setState({ password: event.target.value });
-    }
-
-    render() {
-        return (
+ return (
             <div className ="login-container">
                 <div className="login-card"> 
                 <h2>Iniciar Sesión</h2>
-                <form onSubmit={(event) => this.evitarSubmit(event)}>
+                <form onSubmit={(event) => evitarSubmit(event)}>
                     <input
                         type="email"
                         placeholder="Email"
-                        value={this.state.email}
-                        onChange={(event) => this.controlarEmail(event)}
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
                     />
                     <input
                         type="password"
                         placeholder="Contraseña"
-                        value={this.state.password}
-                        onChange={(event) => this.controlarPassword(event)}
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
                     />
                     <button type="submit">Ingresar</button>
                 </form>
 
                
-                {this.state.error !== "" ? <p style={{ color: "red" }}>{this.state.error}</p> : null}
+                {error !== "" ? <p style={{ color: "red" }}>{error}</p> : null}
                 </div>
             </div>
         );
-    }
+    
 }
 
 export default Login;
+
+ 
+
+       
+       
+        
+       
+
+      
+
+        
+       
+
+       
+       
+    
