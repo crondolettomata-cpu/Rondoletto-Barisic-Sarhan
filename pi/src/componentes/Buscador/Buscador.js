@@ -2,38 +2,32 @@ import React, { Component } from "react";
 import {withRouter} from 'react-router-dom'
 import "./styles.css";
 import Resultados from "../../screens/Resultados/Resultados"
+import { useState } from "react";
 
-class Buscador extends Component {
-    constructor(props){
-        super(props);
-        this.state ={
-            search: '',
-            tipo: 'movie'
-        };
-    };
+function Buscador (props) {
+    const [search, setSearch] = useState("");
+    const [tipo, setTipo] = useState("movie");
 
-    onSubmit(event){
+    const onSubmit = (event) => {
         event.preventDefault()
-
-        this.props.history.push(`/resultados?tipo=${this.state.tipo}&search=${this.state.search}`);
+        props.history.push(`/resultados?tipo=${tipo}&search=${search}`);
     };
 
-    guardarTipo(event){
-        this.setState({tipo:event.target.value})
+    const guardarTipo = (event) => {
+        setTipo (event.target.value)
     }
 
-    guardarBusqueda(event){
-        this.setState(
-            {search: event.target.value}, () => this.state.search)
+    const guardarBusqueda = (event) => {
+        setSearch( event.target.value)
     }
 
-    render(){
+    
         return(
             <div>
-                <form className="buscador" onSubmit={(event) => this.onSubmit(event)}>
-                    <input onChange={(event) => this.guardarBusqueda(event)}/>
+                <form className="buscador" onSubmit={(event) => onSubmit(event)}>
+                    <input onChange={(event) => guardarBusqueda(event)}/>
 
-                    <select onChange={(event) => this.guardarTipo(event)} value={this.state.tipo}>
+                    <select onChange={(event) => guardarTipo(event)} value={tipo}>
                     
                     <option value="movie">Peliculas</option>
                     <option value="tv">Series</option>
@@ -44,7 +38,7 @@ class Buscador extends Component {
             </div>
 
         );
-    };
+
 };
 
 export default withRouter (Buscador);

@@ -1,44 +1,39 @@
 import React, { Component } from "react";
 import SeccionSerie from "../../componentes/SeccionSerie/SeccionSerie";
 import Filtro from "../../componentes/Filtro/Filtro";
+import { useState } from "react";
 
-class Series extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        filtro: "",
-        click: 0
-        };
+function Series () {
+    const [filtro, setFiltro] = useState("")
+    const [click, setClick] = useState(0)
+    
+
+    const filtros = (texto) => {
+        setFiltro(texto );
+    };
+
+    const cargarMas = () => {
+        setClick(click + 1)
     }
 
-    filtros = (texto) => {
-        this.setState({ filtro: texto });
-    };
 
-    cargarMas = () => {
-        this.setState({
-            click: this.state.click + 1
-        });
-    };
-
-    render() {
         return (
-        <div>
+            <div>
 
-            <Filtro
-                placeholder="flitro"
-                value={this.state.filtro}
-                onChange={this.filtros}
-            />
+                <Filtro
+                    placeholder="flitro"
+                    value={filtro}
+                    onChange={filtros}
+                />
 
-            <SeccionSerie
-                filtro={this.state.filtro}
-                mostrarBoton={true}
-            />
+                <SeccionSerie
+                    filtro={filtro}
+                    mostrarBoton={true}
+                />
 
-        </div>
+            </div>
         );
-    }
+    
 }
 
 export default Series;

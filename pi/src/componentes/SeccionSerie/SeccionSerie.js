@@ -1,42 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import CardS from "../CardS/CardS";
 import {Link} from "react-router-dom";
-import Loader from "../Loader/Loader"
+import Loader from "../Loader/Loader";
+import { useState, useEffect } from "react";
 import "./styles.css"
 
-class SeccionSerie extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            datos:[],
-            pagina: 1
-        }
-    }
 
-    componentDidMount(){
+function SeccionSerie (props){
+    const [datos, setDatos] = useState([])
+    const [pagina, setPagina] = useState(1)
+   
+    useEffect ( () => {
         fetch("https://api.themoviedb.org/3/tv/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=1")
         .then (response => response.json())
         .then(data => {this.setState({datos: data.results})})
         .catch(error => console.log(error))
-    }
+    } , []) 
+    
+
+    
 
     cargarMas = () => {
-        let paginaSiguiente = this.state.pagina + 1;
+        let paginaSiguiente = pagina + 1;
 
         fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=9f00611fdf617c67427de634a461ac6c&page=${paginaSiguiente}`)
         .then(res => res.json())
         .then(data => {
-            this.setState({
-                datos: this.state.datos.concat(data.results),
-                pagina: paginaSiguiente
-            });
+            setDatos(concat(data.results))
+            setPagina (paginaSiguiente)
         })
         .catch(error => console.log(error));
     }
 
-    render(){
+   
 
-        const textoFiltro = this.props.filtro || "";
+        const textoFiltro = filtro || "";
 
         const filtradas = this.state.datos.filter(serie =>
         serie.name.toLowerCase().includes(textoFiltro.toLowerCase())
@@ -47,7 +45,7 @@ class SeccionSerie extends Component{
                 <h1 className='titulo'> Series mejores ranqueadas</h1>
 
                 <div className='section'>
-                {this.state.datos.length === 0 ? (
+                {datos.length === 0 ? (
                     <Loader/>
                 ) : (
                     filtradas.map(serie =>(
@@ -62,15 +60,15 @@ class SeccionSerie extends Component{
                 )}
                 </div>
 
-                {this.props.mostrarBoton && (
-                    <button onClick={this.cargarMas}>
+                {props.mostrarBoton && (
+                    <button onClick={cargarMas}>
                         Cargar más
                     </button>
                 )}
 
             </section>
         );
-    };
+
 };
 
 export default SeccionSerie;
